@@ -1,77 +1,141 @@
 Procedure
   BeginBlock
-    3(procedure)
+    PROCEDURE(procedure)
     Id
-      1(suslik)
-    13(;)
-    4(begin)
+      ID(suslik)
+    SEMICOLON(;)
+    BEGIN(begin)
   Descriptions
-    6(var)
+    VAR(var)
     DescrList
       Descr
         VarList
           Id
-            1(a)
-        15(:)
+            ID(a)
+          COMMA(,)
+          Id
+            ID(b)
+        COLON(:)
         Type
-          7(integer)
-        13(;)
+          INTEGER(integer)
+        SEMICOLON(;)
   Operators
     Op
       Id
-        1(a)
-      10(:=)
+        ID(a)
+      ASSIGN(:=)
       Expr
         SimpleExpr
           Const
-            2(13)
-        11(+)
+            CONST(13)
+        PLUS(+)
         Expr
           SimpleExpr
             Id
-              1(a)
-      13(;)
-    Op
-      8(case)
-      Expr
-        SimpleExpr
-          16(()
-          Expr
-            SimpleExpr
-              Id
-                1(a)
-            11(+)
-            Expr
-              SimpleExpr
-                Const
-                  2(12)
-          17())
-      9(of)
-      Options
-        Const
-          2(12)
-        15(:)
-        Operators
-          Op
-            Id
-              1(a)
-            10(:=)
-            Expr
-              SimpleExpr
-                Const
-                  2(4)
-            13(;)
-      5(end)
-      13(;)
+              ID(a)
+      SEMICOLON(;)
     Op
       Id
-        1(a)
-      10(:=)
+        ID(b)
+      ASSIGN(:=)
       Expr
         SimpleExpr
           Const
-            2(12)
-      13(;)
+            CONST(12)
+        MINUS(-)
+        Expr
+          SimpleExpr
+            Id
+              ID(a)
+          PLUS(+)
+          Expr
+            SimpleExpr
+              Const
+                CONST(6)
+      SEMICOLON(;)
+    Op
+      CASE(case)
+      Expr
+        SimpleExpr
+          LPAREN(()
+          Expr
+            SimpleExpr
+              Id
+                ID(a)
+            PLUS(+)
+            Expr
+              SimpleExpr
+                Const
+                  CONST(12)
+          RPAREN())
+      OF(of)
+      Options
+        Const
+          CONST(12)
+        COLON(:)
+        Operators
+          Op
+            Id
+              ID(a)
+            ASSIGN(:=)
+            Expr
+              SimpleExpr
+                Const
+                  CONST(4)
+            SEMICOLON(;)
+        Const
+          CONST(11)
+        COLON(:)
+        Operators
+          Op
+            Id
+              ID(b)
+            ASSIGN(:=)
+            Expr
+              SimpleExpr
+                Const
+                  CONST(5)
+              PLUS(+)
+              Expr
+                SimpleExpr
+                  Const
+                    CONST(1)
+                MINUS(-)
+                Expr
+                  SimpleExpr
+                    Id
+                      ID(a)
+            SEMICOLON(;)
+      END(end)
+      SEMICOLON(;)
+    Op
+      Id
+        ID(a)
+      ASSIGN(:=)
+      Expr
+        SimpleExpr
+          Const
+            CONST(12)
+        MINUS(-)
+        Expr
+          SimpleExpr
+            Id
+              ID(b)
+      SEMICOLON(;)
+    Op
+      Id
+        ID(b)
+      ASSIGN(:=)
+      Expr
+        SimpleExpr
+          Const
+            CONST(12)
+        PLUS(+)
+        Expr
+          SimpleExpr
+            Const
+              CONST(2)
+      SEMICOLON(;)
   EndBlock
-    5(end)
-18(EOF)
+    END(end)
+EOF(EOF)

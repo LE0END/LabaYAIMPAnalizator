@@ -1,5 +1,31 @@
 ﻿#include "Parser.h"
 
+const std::string typeToString(Type t) {
+    switch (t) {
+    case Type::Null: return "Null";
+    case Type::id: return "ID";
+    case Type::Const: return "CONST";
+    case Type::RW_PROCEDURE: return "PROCEDURE";
+    case Type::RW_BEGIN: return "BEGIN";
+    case Type::RW_END: return "END";
+    case Type::RW_VAR: return "VAR";
+    case Type::RW_INTEGER: return "INTEGER";
+    case Type::RW_CASE: return "CASE";
+    case Type::RW_OF: return "OF";
+    case Type::OP_ASSIGN: return "ASSIGN";
+    case Type::OP_PLUS: return "PLUS";
+    case Type::OP_MINUS: return "MINUS";
+    case Type::SEMICOLON: return "SEMICOLON";
+    case Type::COMMA: return "COMMA";
+    case Type::COLON: return "COLON";
+    case Type::LPAREN: return "LPAREN";
+    case Type::RPAREN: return "RPAREN";
+    case Type::END_OF_FILE: return "EOF";
+    case Type::Error: return "ERROR";
+    default: return "UNKNOWN";
+    }
+}
+
 Parser::Parser(const std::vector<HashTable::Token>& src) {
     tokens = src;
     tokens.push_back(HashTable::Token(Type::END_OF_FILE, "EOF"));
@@ -21,7 +47,7 @@ HashTable::Token Parser::advance() {
 
 bool Parser::accept(Type t) {
     if (peek().type == t) {
-        treeLeaf(std::to_string((int)t) + "(" + peek().str + ")");
+        treeLeaf(typeToString(t) + "(" + peek().str + ")");
         advance();
         return true;
     }
@@ -32,13 +58,13 @@ bool Parser::accept(Type t) {
 bool Parser::expect(Type t, const std::string& msg) {
 
     if (peek().type == t) {
-        treeLeaf(std::to_string((int)t) + "(" + peek().str + ")");
+        treeLeaf(typeToString(t) + "(" + peek().str + ")");
         advance();
         return true;
     }
 
     hasError = true;
-    std::cerr << "Ошибка: ожидалось " << msg
+    std::cout << "Ошибка: ожидалось " << msg
         << ", встретилось '" << peek().str << "'\n";
     // едим до конца выражения
     while (peek().type != Type::SEMICOLON &&
@@ -82,7 +108,7 @@ bool Parser::parse() {
     expect(Type::END_OF_FILE, "EOF");
 
     if (hasError) {
-        std::cerr << "Parse FAILED: обнаружены ошибки\n";
+        std::cout << "Parse FAILED: обнаружены ошибки\n";
         return false;
     }
 
@@ -217,7 +243,7 @@ bool Parser::Op() {
     }
 
     hasError = true;  
-    std::cerr << "Ошибка: ожидался оператор, но найдено '" << peek().str << "'\n";
+    std::cout << "Ошибка: ожидался оператор, но найдено '" << peek().str << "'\n";
 
     while (peek().type != Type::SEMICOLON &&
         peek().type != Type::END_OF_FILE)
@@ -281,7 +307,7 @@ bool Parser::SimpleExpr() {
     }
 
     hasError = true;
-    std::cerr << "Ошибка: неверное выражение '" << peek().str << "'\n";
+    std::cout << "Ошибка: неверное выражение '" << peek().str << "'\n";
 
     // едим до конца выражения
     while (peek().type != Type::SEMICOLON &&
