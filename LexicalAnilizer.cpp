@@ -1,16 +1,5 @@
 #include "LexicalAnilizer.h"
 
-
-LexicalAnilizer::LexicalAnilizer() {
-	Avt.FA.AddNewToken(HashTable::Token(RW_PROCEDURE, "procedure"));
-	Avt.FA.AddNewToken(HashTable::Token(RW_BEGIN, "begin"));
-	Avt.FA.AddNewToken(HashTable::Token(RW_END, "end"));
-	Avt.FA.AddNewToken(HashTable::Token(RW_VAR, "var"));
-	Avt.FA.AddNewToken(HashTable::Token(RW_INTEGER, "integer"));
-	Avt.FA.AddNewToken(HashTable::Token(RW_CASE, "case"));
-	Avt.FA.AddNewToken(HashTable::Token(RW_OF, "of"));
-}
-
 void LexicalAnilizer::openInputFile(const std::string& InputFile) {
 	Input.open(InputFile);
 }
@@ -119,6 +108,16 @@ void LexicalAnilizer::Analize(std::vector<HashTable::Token>& Tokens) {
 		}
 	}
 	Tmp.clear();
+}
+
+LexicalAnilizer::LexicalAnilizer() {
+	Avt.FA.AddNewToken(HashTable::Token(RW_PROCEDURE, "procedure"));
+	Avt.FA.AddNewToken(HashTable::Token(RW_BEGIN, "begin"));
+	Avt.FA.AddNewToken(HashTable::Token(RW_END, "end"));
+	Avt.FA.AddNewToken(HashTable::Token(RW_VAR, "var"));
+	Avt.FA.AddNewToken(HashTable::Token(RW_INTEGER, "integer"));
+	Avt.FA.AddNewToken(HashTable::Token(RW_CASE, "case"));
+	Avt.FA.AddNewToken(HashTable::Token(RW_OF, "of"));
 }
 
 void LexicalAnilizer::PrintToFile(const std::string& Out) {

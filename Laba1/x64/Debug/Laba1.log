@@ -1,6 +1,6 @@
-﻿  Parser.cpp
+﻿  Laba1.cpp
 C:\Users\User\Desktop\LabaYAIMP\Laba1\Hashy.h(43,9): warning C4240: нестандартное расширение: уровень доступа "HashTable::Token" теперь задан как "public", но ранее он был определен как "private"
-  (компиляция исходного файла "Parser.cpp")
+  (компиляция исходного файла "Laba1.cpp")
       C:\Users\User\Desktop\LabaYAIMP\Laba1\Hashy.h(37,9):
        см. объявление "HashTable::Token"
   

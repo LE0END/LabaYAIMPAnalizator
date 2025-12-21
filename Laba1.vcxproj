@@ -129,12 +129,14 @@
     <ClCompile Include="Laba1.cpp" />
     <ClCompile Include="LexicalAnilizer.cpp" />
     <ClCompile Include="Parser.cpp" />
+    <ClCompile Include="SematixAnilizer.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Avtomat.h" />
     <ClInclude Include="Hashy.h" />
     <ClInclude Include="LexicalAnilizer.h" />
     <ClInclude Include="Parser.h" />
+    <ClInclude Include="SematixAnilizer.h" />
     <ClInclude Include="Wector.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

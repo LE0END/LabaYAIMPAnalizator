@@ -1,0 +1,20 @@
+integer a b c d 5 DECL
+a c a + d + b + c + := 
+b 12 a 6 + - := 
+b 12 a - 6 + := 
+b 12 a - 6 + := 
+b a 12 + - 12 = #M0 BF a 4 := 
+#M0 DEFL
+b a 12 + - 11 = #M1 BF b 5 1 + a - := 
+#M1 DEFL
+b a 12 + - 5 = #M2 BF b 5 1 + a - := 
+a 2 b - a 1 - + := 
+#M2 DEFL
+b a 12 + - 6 = #M3 BF a a a + := 
+#M3 DEFL
+b a 12 + - 42 = #M4 BF a 42 := 
+#M4 DEFL
+b a 12 + - 1399 = #M5 BF d 32 := 
+#M5 DEFL
+a 12 b - := 
+b 12 2 + := 

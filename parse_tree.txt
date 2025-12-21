@@ -1,141 +1,308 @@
 Procedure
   BeginBlock
-    PROCEDURE(procedure)
+    PROCEDURE : procedure
     Id
-      ID(suslik)
-    SEMICOLON(;)
-    BEGIN(begin)
+      ID : suslik
+    SEMICOLON : ;
+    BEGIN : begin
   Descriptions
-    VAR(var)
+    VAR : var
     DescrList
       Descr
         VarList
           Id
-            ID(a)
-          COMMA(,)
+            ID : a
+          COMMA : ,
           Id
-            ID(b)
-        COLON(:)
+            ID : b
+          COMMA : ,
+          Id
+            ID : c
+          COMMA : ,
+          Id
+            ID : d
+        COLON : :
         Type
-          INTEGER(integer)
-        SEMICOLON(;)
-  Operators
-    Op
-      Id
-        ID(a)
-      ASSIGN(:=)
-      Expr
-        SimpleExpr
-          Const
-            CONST(13)
-        PLUS(+)
+          INTEGER : integer
+        SEMICOLON : ;
+    Operators
+      Op
+        Id
+          ID : a
+        ASSIGN : :=
         Expr
           SimpleExpr
             Id
-              ID(a)
-      SEMICOLON(;)
-    Op
-      Id
-        ID(b)
-      ASSIGN(:=)
-      Expr
-        SimpleExpr
-          Const
-            CONST(12)
-        MINUS(-)
-        Expr
-          SimpleExpr
-            Id
-              ID(a)
-          PLUS(+)
-          Expr
-            SimpleExpr
-              Const
-                CONST(6)
-      SEMICOLON(;)
-    Op
-      CASE(case)
-      Expr
-        SimpleExpr
-          LPAREN(()
+              ID : c
+          PLUS : +
           Expr
             SimpleExpr
               Id
-                ID(a)
-            PLUS(+)
+                ID : a
+            PLUS : +
             Expr
               SimpleExpr
-                Const
-                  CONST(12)
-          RPAREN())
-      OF(of)
-      Options
-        Const
-          CONST(12)
-        COLON(:)
-        Operators
-          Op
-            Id
-              ID(a)
-            ASSIGN(:=)
-            Expr
-              SimpleExpr
-                Const
-                  CONST(4)
-            SEMICOLON(;)
-        Const
-          CONST(11)
-        COLON(:)
-        Operators
-          Op
-            Id
-              ID(b)
-            ASSIGN(:=)
-            Expr
-              SimpleExpr
-                Const
-                  CONST(5)
-              PLUS(+)
+                Id
+                  ID : d
+              PLUS : +
               Expr
                 SimpleExpr
-                  Const
-                    CONST(1)
-                MINUS(-)
+                  Id
+                    ID : b
+                PLUS : +
                 Expr
                   SimpleExpr
                     Id
-                      ID(a)
-            SEMICOLON(;)
-      END(end)
-      SEMICOLON(;)
-    Op
-      Id
-        ID(a)
-      ASSIGN(:=)
-      Expr
-        SimpleExpr
-          Const
-            CONST(12)
-        MINUS(-)
-        Expr
-          SimpleExpr
-            Id
-              ID(b)
-      SEMICOLON(;)
-    Op
-      Id
-        ID(b)
-      ASSIGN(:=)
-      Expr
-        SimpleExpr
-          Const
-            CONST(12)
-        PLUS(+)
+                      ID : c
+        SEMICOLON : ;
+      Op
+        Id
+          ID : b
+        ASSIGN : :=
         Expr
           SimpleExpr
             Const
-              CONST(2)
-      SEMICOLON(;)
-  EndBlock
-    END(end)
-EOF(EOF)
+              CONST : 12
+          MINUS : -
+          Expr
+            SimpleExpr
+              LPAREN : (
+              Expr
+                SimpleExpr
+                  Id
+                    ID : a
+                PLUS : +
+                Expr
+                  SimpleExpr
+                    Const
+                      CONST : 6
+              RPAREN : )
+        SEMICOLON : ;
+      Op
+        Id
+          ID : b
+        ASSIGN : :=
+        Expr
+          SimpleExpr
+            Const
+              CONST : 12
+          MINUS : -
+          Expr
+            SimpleExpr
+              Id
+                ID : a
+            PLUS : +
+            Expr
+              SimpleExpr
+                Const
+                  CONST : 6
+        SEMICOLON : ;
+      Op
+        Id
+          ID : b
+        ASSIGN : :=
+        Expr
+          SimpleExpr
+            LPAREN : (
+            Expr
+              SimpleExpr
+                Const
+                  CONST : 12
+              MINUS : -
+              Expr
+                SimpleExpr
+                  Id
+                    ID : a
+            RPAREN : )
+          PLUS : +
+          Expr
+            SimpleExpr
+              Const
+                CONST : 6
+        SEMICOLON : ;
+      Op
+        CASE : case
+        Expr
+          SimpleExpr
+            Id
+              ID : b
+          MINUS : -
+          Expr
+            SimpleExpr
+              LPAREN : (
+              Expr
+                SimpleExpr
+                  Id
+                    ID : a
+                PLUS : +
+                Expr
+                  SimpleExpr
+                    Const
+                      CONST : 12
+              RPAREN : )
+        OF : of
+        Options
+          Const
+            CONST : 12
+          COLON : :
+          Operators
+            Op
+              Id
+                ID : a
+              ASSIGN : :=
+              Expr
+                SimpleExpr
+                  Const
+                    CONST : 4
+              SEMICOLON : ;
+          Const
+            CONST : 11
+          COLON : :
+          Operators
+            Op
+              Id
+                ID : b
+              ASSIGN : :=
+              Expr
+                SimpleExpr
+                  Const
+                    CONST : 5
+                PLUS : +
+                Expr
+                  SimpleExpr
+                    Const
+                      CONST : 1
+                  MINUS : -
+                  Expr
+                    SimpleExpr
+                      Id
+                        ID : a
+              SEMICOLON : ;
+          Const
+            CONST : 5
+          COLON : :
+          Operators
+            Op
+              Id
+                ID : b
+              ASSIGN : :=
+              Expr
+                SimpleExpr
+                  Const
+                    CONST : 5
+                PLUS : +
+                Expr
+                  SimpleExpr
+                    Const
+                      CONST : 1
+                  MINUS : -
+                  Expr
+                    SimpleExpr
+                      Id
+                        ID : a
+              SEMICOLON : ;
+            Op
+              Id
+                ID : a
+              ASSIGN : :=
+              Expr
+                SimpleExpr
+                  Const
+                    CONST : 2
+                MINUS : -
+                Expr
+                  SimpleExpr
+                    Id
+                      ID : b
+                  PLUS : +
+                  Expr
+                    SimpleExpr
+                      LPAREN : (
+                      Expr
+                        SimpleExpr
+                          Id
+                            ID : a
+                        MINUS : -
+                        Expr
+                          SimpleExpr
+                            Const
+                              CONST : 1
+                      RPAREN : )
+              SEMICOLON : ;
+          Const
+            CONST : 6
+          COLON : :
+          Operators
+            Op
+              Id
+                ID : a
+              ASSIGN : :=
+              Expr
+                SimpleExpr
+                  Id
+                    ID : a
+                PLUS : +
+                Expr
+                  SimpleExpr
+                    Id
+                      ID : a
+              SEMICOLON : ;
+          Const
+            CONST : 42
+          COLON : :
+          Operators
+            Op
+              Id
+                ID : a
+              ASSIGN : :=
+              Expr
+                SimpleExpr
+                  Const
+                    CONST : 42
+              SEMICOLON : ;
+          Const
+            CONST : 1399
+          COLON : :
+          Operators
+            Op
+              Id
+                ID : d
+              ASSIGN : :=
+              Expr
+                SimpleExpr
+                  Const
+                    CONST : 32
+              SEMICOLON : ;
+        END : end
+        SEMICOLON : ;
+      Op
+        Id
+          ID : a
+        ASSIGN : :=
+        Expr
+          SimpleExpr
+            Const
+              CONST : 12
+          MINUS : -
+          Expr
+            SimpleExpr
+              Id
+                ID : b
+        SEMICOLON : ;
+      Op
+        Id
+          ID : b
+        ASSIGN : :=
+        Expr
+          SimpleExpr
+            Const
+              CONST : 12
+          PLUS : +
+          Expr
+            SimpleExpr
+              Const
+                CONST : 2
+        SEMICOLON : ;
+    EndBlock
+      END : end
+  EOF : EOF

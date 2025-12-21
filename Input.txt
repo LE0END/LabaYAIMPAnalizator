@@ -1,11 +1,17 @@
 procedure suslik ;
 begin
-var a,b : integer ;
-a:= 13 + a;
+var a,b,c,d : integer ;
+a:=c+a+d+b+c;
+b:=12-(a+6);
 b:=12-a+6;
-case (a + 12) of 
+b:=(12-a)+6;
+case b-(a + 12) of 
 12 : a := 4;
 11: b:=5+1-a;
+5: b:=5+1-a; a:=2-b+(a-1);
+6: a:=a+a;
+42: a:=42;
+1399: d := 32;
 end;
 a:=12-b;
 b:= 12 + 2;

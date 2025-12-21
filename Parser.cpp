@@ -47,8 +47,9 @@ HashTable::Token Parser::advance() {
 
 bool Parser::accept(Type t) {
     if (peek().type == t) {
-        treeLeaf(typeToString(t) + "(" + peek().str + ")");
+        pushNode(typeToString(t), peek().str);
         advance();
+        popNode();
         return true;
     }
     return false;
@@ -58,8 +59,9 @@ bool Parser::accept(Type t) {
 bool Parser::expect(Type t, const std::string& msg) {
 
     if (peek().type == t) {
-        treeLeaf(typeToString(t) + "(" + peek().str + ")");
+        pushNode(typeToString(t), peek().str);
         advance();
+        popNode();
         return true;
     }
 
@@ -78,36 +80,36 @@ bool Parser::expect(Type t, const std::string& msg) {
     return true;
 }
 
+void Parser::pushNode(const std::string& v1, const std::string& v2) {
+    Node* n = new Node(v1, v2);
 
-void Parser::treePush(const std::string& name) {
-    std::string tmp(depth * 2, ' ');
-    tree.push_back(tmp + name + "\n");
-    depth++;
+    if (!nodeStack.empty())
+        nodeStack.top()->NewChild(n);
+    else
+        root = n;   // первый узел — корень
+
+    nodeStack.push(n);
 }
 
-void Parser::treePop() {
-    depth--;
+void Parser::popNode() {
+    if (!nodeStack.empty())
+        nodeStack.pop();
 }
 
-void Parser::treeLeaf(const std::string& name) {
-    std::string tmp(depth * 2, ' ');
-    tree.push_back(tmp + name + "\n");
-}
 
 
 bool Parser::parse() {
 
-    tree.clear();
-    depth = 0;
     hasError = false;
 
-    treePush("Procedure");
+
     Procedure();
-    treePop();
+
 
     expect(Type::END_OF_FILE, "EOF");
 
     if (hasError) {
+        root = nullptr;
         std::cout << "Parse FAILED: обнаружены ошибки\n";
         return false;
     }
@@ -119,54 +121,58 @@ bool Parser::parse() {
     return true;
 }
 
-void Parser::printTree() const {
-    for (auto& s : tree) std::cout << s;
-}
-
-void Parser::saveTree(const std::string& filename) const {
-    std::ofstream f(filename);
-    for (auto& s : tree) f << s;
-    f.close();
-}
-
 
 bool Parser::Procedure() {
-    return BeginBlock() && Descriptions() && Operators() && EndBlock();
+    pushNode("Procedure");
+
+    BeginBlock();
+    Descriptions();
+    Operators();
+    EndBlock();
+
+    popNode();
+    return true;
 }
 
 bool Parser::BeginBlock() {
-    treePush("BeginBlock");
+    pushNode("BeginBlock");
+
     expect(Type::RW_PROCEDURE, "procedure");
     IdRule();
     expect(Type::SEMICOLON, ";");
     expect(Type::RW_BEGIN, "begin");
-    treePop();
+
+    popNode();
     return true;
 }
 
 bool Parser::EndBlock() {
-    treePush("EndBlock");
+    pushNode("EndBlock");
+
     expect(Type::RW_END, "end");
-    treePop();
+
+    popNode();
     return true;
 }
 
 bool Parser::Descriptions() {
-    treePush("Descriptions");
+    pushNode("Descriptions");
+
 
     if (accept(Type::RW_VAR)) {
         DescrList();
-        treePop();
         return true;
     }
 
-    treeLeaf("(empty)");
-    treePop();
+
+
+    popNode();
     return true;
 }
 
 bool Parser::DescrList() {
-    treePush("DescrList");
+
+    pushNode("DescrList");
 
     Descr();
 
@@ -176,58 +182,66 @@ bool Parser::DescrList() {
         Descr();
     }
 
-    treePop();
+
+    popNode();
     return true;
 }
 
 bool Parser::Descr() {
-    treePush("Descr");
+    pushNode("Descr");
+
     VarList();
     expect(Type::COLON, ":");
     TypeRule();
     expect(Type::SEMICOLON, ";");
-    treePop();
+
+    popNode();
     return true;
 }
 
 bool Parser::VarList() {
-    treePush("VarList");
+    pushNode("VarList");
 
     IdRule();
     while (accept(Type::COMMA))
         IdRule();
 
-    treePop();
+
+    popNode();
     return true;
 }
 
 bool Parser::TypeRule() {
-    treePush("Type");
+    pushNode("Type");
+
     expect(Type::RW_INTEGER, "integer");
-    treePop();
+
+    popNode();
     return true;
 }
 
 bool Parser::Operators() {
-    treePush("Operators");
+    pushNode("Operators");
+
 
     Op();
     while (peek().type == Type::id || peek().type == Type::RW_CASE)
         Op();
 
-    treePop();
+    popNode();
     return true;
 }
 
 bool Parser::Op() {
-    treePush("Op");
 
+    pushNode("Op");
     if (peek().type == Type::id) {
         IdRule();
         expect(Type::OP_ASSIGN, ":=");
         Expr();
         expect(Type::SEMICOLON, ";");
-        treePop();
+
+        popNode();
         return true;
     }
 
@@ -238,7 +252,8 @@ bool Parser::Op() {
         Options();
         expect(Type::RW_END, "end");
         expect(Type::SEMICOLON, ";");
-        treePop();
+
+        popNode();
         return true;
     }
 
@@ -249,15 +264,16 @@ bool Parser::Op() {
         peek().type != Type::END_OF_FILE)
         advance();
 
-    accept(Type::SEMICOLON); // съедим ;
+    accept(Type::SEMICOLON); // съедим все ошибки ХЕХЕ;
 
-    treePop();
+
+    popNode();
     return true;
 }
 
 bool Parser::Options() {
-    treePush("Options");
 
+    pushNode("Options");
     ConstRule();
     expect(Type::COLON, ":");
     Operators();
@@ -268,41 +284,45 @@ bool Parser::Options() {
         Operators();
     }
 
-    treePop();
+
+    popNode();
     return true;
 }
 
 bool Parser::Expr() {
-    treePush("Expr");
 
+    pushNode("Expr");
     SimpleExpr();
 
     if (accept(Type::OP_PLUS))  Expr();
     else if (accept(Type::OP_MINUS)) Expr();
+    popNode();
 
-    treePop();
     return true;
 }
 
 bool Parser::SimpleExpr() {
-    treePush("SimpleExpr");
 
+    pushNode("SimpleExpr");
     if (peek().type == Type::id) {
         IdRule();
-        treePop();
+
+        popNode();
         return true;
     }
 
     if (peek().type == Type::Const) {
         ConstRule();
-        treePop();
+
+        popNode();
         return true;
     }
 
     if (accept(Type::LPAREN)) {
         Expr();
         expect(Type::RPAREN, ")");
-        treePop();
+
+        popNode();
         return true;
     }
 
@@ -315,20 +335,77 @@ bool Parser::SimpleExpr() {
         peek().type != Type::END_OF_FILE)
         advance();
 
-    treePop();
+
+    popNode();
     return true;
 }
 
 bool Parser::IdRule() {
-    treePush("Id");
+
+    pushNode("Id");
     expect(Type::id, "идентификатор");
-    treePop();
+
+    popNode();
     return true;
 }
 
 bool Parser::ConstRule() {
-    treePush("Const");
+
+    pushNode("Const");
     expect(Type::Const, "константа");
-    treePop();
+
+    popNode();
     return true;
+}
+
+Node* Node::find2(const std::string& Val1, const std::string& Val2) {
+    if (this->Val1 == Val1 && this->Val2 == Val2) return this;
+
+    for (int i = 0; i < this->Offsprings.size(); i++) {
+        if (this->Offsprings[i]->Val1 == Val1 && this->Offsprings[i]->Val2 == Val2) {
+            return this->Offsprings[i];
+        }
+
+        Node* found = this->Offsprings[i]->find2(Val1, Val2);
+        if (found != nullptr) {
+            return found;
+        }
+    }
+    return nullptr;
+}
+
+Node* Node::find1(const std::string& Val1)
+{
+    if (this->Val1 == Val1) return this;
+
+    for (int i = 0; i < this->Offsprings.size(); i++) {
+        if (this->Offsprings[i]->Val1 == Val1) {
+            return this->Offsprings[i];
+        }
+
+        Node* found = this->Offsprings[i]->find1(Val1);
+        if (found != nullptr) {
+            return found;
+        }
+    }
+    return nullptr;
+}
+
+void Node::NewChild(Node* Child) {
+    Offsprings.push_back(Child);
+}
+
+void Parser::printNodeTree(std::ostream& out,const Node* node, int indent) {
+    if (!node) return;
+
+    for (int i = 0; i < indent; ++i)
+        out << "  ";
+
+    out << node->Val1;
+    if (!node->Val2.empty())
+        out << " : " << node->Val2;
+    out << "\n";
+
+    for (const Node* child : node->Offsprings)
+        printNodeTree(out,child, indent + 1);
 }
