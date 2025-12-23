@@ -30,17 +30,21 @@ std::string SematixAnilizer::Gen() {
 	return "#M"+std::to_string(GenMet++);
 }
 
-void SematixAnilizer::Declaration(Node* VarList) {
-	for (int i = 0; i < VarList->Offsprings.size(); i++) {
-		if (VarList->Offsprings[i]->Val1 == "Id") {
-			if (declaredVariables.find(VarList->Offsprings[i]->Offsprings[0]->Val2) == declaredVariables.end()) {
-				declaredVariables.insert(VarList->Offsprings[i]->Offsprings[0]->Val2);
-			}
-			else {
-				Errors.push_back("Повторное объявление, ФУ: "+ VarList->Offsprings[i]->Offsprings[0]->Val2+'\n');
+void SematixAnilizer::Declaration(Node* DescrList) {
+	for (int j = 0;j < DescrList->Offsprings.size();j++) {
+		Node* VarList = DescrList->Offsprings[j]->Offsprings[0];
+		for (int i = 0; i < VarList->Offsprings.size(); i++) {
+			if (VarList->Offsprings[i]->Val1 == "Id") {
+				if (declaredVariables.find(VarList->Offsprings[i]->Offsprings[0]->Val2) == declaredVariables.end()) {
+					declaredVariables.insert(VarList->Offsprings[i]->Offsprings[0]->Val2);
+				}
+				else {
+					Errors.push_back("Повторное объявление, ФУ: " + VarList->Offsprings[i]->Offsprings[0]->Val2 + '\n');
+				}
 			}
 		}
 	}
+	
 }
 
 void SematixAnilizer::Operators(Node* Operators) {
@@ -148,7 +152,7 @@ void SematixAnilizer::Case(Node* Op) {
 
 bool SematixAnilizer::analyze(Node* root) {
 
-	Declaration(root->find1("VarList"));
+	Declaration(root->find1("DescrList"));
 	if (!declaredVariables.empty()) {
 		std::string post = "integer ";
 

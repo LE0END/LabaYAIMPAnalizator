@@ -17,7 +17,7 @@ private:
     std::vector<std::string> Test;
     int GenMet = 0;
     std::string Gen();
-    void Declaration(Node* VarList);
+    void Declaration(Node* DescrList);
     void Operators(Node* Operators);
     void Op(Node* Op);
     void Preobr(Node* Expr);
