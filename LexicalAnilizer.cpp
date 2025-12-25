@@ -4,7 +4,8 @@ void LexicalAnilizer::openInputFile(const std::string& InputFile) {
 	Input.open(InputFile);
 }
 
-void LexicalAnilizer::Analize(std::vector<HashTable::Token>& Tokens) {
+bool LexicalAnilizer::Analize(std::vector<HashTable::Token>& Tokens) {
+	bool anw = true;
 	std::string Tmp;
 	Tmp.reserve(24);
 	char t;
@@ -33,6 +34,7 @@ void LexicalAnilizer::Analize(std::vector<HashTable::Token>& Tokens) {
 						else {
 							Tokens.push_back(HashTable::Token(Error, Tmp));
 							T.insert(HashTable::Token(Error, Tmp));
+							anw = false;
 						}
 					}
 				}
@@ -103,11 +105,13 @@ void LexicalAnilizer::Analize(std::vector<HashTable::Token>& Tokens) {
 				else {
 					Tokens.push_back(HashTable::Token(Error, Tmp));
 					T.insert(HashTable::Token(Error, Tmp));
+					anw = false;
 				}
 			}
 		}
 	}
 	Tmp.clear();
+	return anw;
 }
 
 LexicalAnilizer::LexicalAnilizer() {
@@ -124,6 +128,6 @@ void LexicalAnilizer::PrintToFile(const std::string& Out) {
 	std::ofstream out;
 	out.open(Out);
 	T.print(out);
-	T.print(std::cout);
+	//T.print(std::cout);
 	out.close();
 }

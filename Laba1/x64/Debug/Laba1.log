@@ -1,7 +1,86 @@
-﻿  Laba1.cpp
+﻿  Avtomat.cpp
+C:\Users\User\Desktop\LabaYAIMP\Laba1\Hashy.h(43,9): warning C4240: нестандартное расширение: уровень доступа "HashTable::Token" теперь задан как "public", но ранее он был определен как "private"
+  (компиляция исходного файла "Avtomat.cpp")
+      C:\Users\User\Desktop\LabaYAIMP\Laba1\Hashy.h(37,9):
+       см. объявление "HashTable::Token"
+  
+C:\Users\User\Desktop\LabaYAIMP\Laba1\Avtomat.cpp(26,44): warning C4267: =: преобразование из "size_t" в "int"; возможна потеря данных
+C:\Users\User\Desktop\LabaYAIMP\Laba1\Avtomat.cpp(37,38): warning C4267: =: преобразование из "size_t" в "int"; возможна потеря данных
+  Hashy.cpp
+C:\Users\User\Desktop\LabaYAIMP\Laba1\Hashy.h(43,9): warning C4240: нестандартное расширение: уровень доступа "HashTable::Token" теперь задан как "public", но ранее он был определен как "private"
+  (компиляция исходного файла "Hashy.cpp")
+      C:\Users\User\Desktop\LabaYAIMP\Laba1\Hashy.h(37,9):
+       см. объявление "HashTable::Token"
+  
+C:\Users\User\Desktop\LabaYAIMP\Laba1\Hashy.cpp(51,48): warning C4244: аргумент: преобразование "double" в "const size_t", возможна потеря данных
+C:\Users\User\Desktop\LabaYAIMP\Laba1\Wector.h(45,27): warning C4244: =: преобразование "double" в "size_t", возможна потеря данных
+  (компиляция исходного файла "Hashy.cpp")
+      C:\Users\User\Desktop\LabaYAIMP\Laba1\Wector.h(45,27):
+      контекст создания экземпляра шаблона (сначала самый старый)
+          C:\Users\User\Desktop\LabaYAIMP\Laba1\Hashy.h(38,24):
+          выполняется компиляция ссылки на экземпляр класс шаблон функции "Wector<Wector<HashTable::Token>>"
+          C:\Users\User\Desktop\LabaYAIMP\Laba1\Wector.h(44,7):
+          во время компиляции функции-члена класс шаблон "void Wector<Wector<HashTable::Token>>::resize(const size_t)"
+              C:\Users\User\Desktop\LabaYAIMP\Laba1\Hashy.cpp(34,14):
+              см. первую ссылку на "Wector<Wector<HashTable::Token>>::resize" в "HashTable::HashTable"
+  
+C:\Users\User\Desktop\LabaYAIMP\Laba1\Wector.h(19,26): warning C4244: =: преобразование "double" в "size_t", возможна потеря данных
+  (компиляция исходного файла "Hashy.cpp")
+      C:\Users\User\Desktop\LabaYAIMP\Laba1\Wector.h(19,26):
+      контекст создания экземпляра шаблона (сначала самый старый)
+          C:\Users\User\Desktop\LabaYAIMP\Laba1\Wector.h(17,2):
+          во время компиляции функции-члена класс шаблон "Wector<Wector<HashTable::Token>>::Wector(const size_t,const T &)"
+          with
+          [
+              T=Wector<HashTable::Token>
+          ]
+              C:\Users\User\Desktop\LabaYAIMP\Laba1\Hashy.cpp(33,24):
+              см. первую ссылку на "Wector<Wector<HashTable::Token>>::Wector" в "HashTable::HashTable"
+  
+C:\Users\User\Desktop\LabaYAIMP\Laba1\Wector.h(56,32): warning C4244: =: преобразование "double" в "size_t", возможна потеря данных
+  (компиляция исходного файла "Hashy.cpp")
+      C:\Users\User\Desktop\LabaYAIMP\Laba1\Wector.h(56,32):
+      контекст создания экземпляра шаблона (сначала самый старый)
+          C:\Users\User\Desktop\LabaYAIMP\Laba1\Hashy.cpp(33,24):
+          См. требуемое выражение для создания экземпляра аргумента по умолчанию для "Wector<Wector<HashTable::Token>>::Wector(const size_t,const T &)".
+          with
+          [
+              T=Wector<HashTable::Token>
+          ]
+          C:\Users\User\Desktop\LabaYAIMP\Laba1\Wector.h(17,44):
+          выполняется компиляция ссылки на экземпляр класс шаблон функции "Wector<HashTable::Token>"
+          C:\Users\User\Desktop\LabaYAIMP\Laba1\Wector.h(53,7):
+          во время компиляции функции-члена класс шаблон "void Wector<HashTable::Token>::push_back(const T &)"
+          with
+          [
+              T=HashTable::Token
+          ]
+              C:\Users\User\Desktop\LabaYAIMP\Laba1\Hashy.cpp(55,21):
+              см. первую ссылку на "Wector<HashTable::Token>::push_back" в "HashTable::insert"
+  
+  Laba1.cpp
 C:\Users\User\Desktop\LabaYAIMP\Laba1\Hashy.h(43,9): warning C4240: нестандартное расширение: уровень доступа "HashTable::Token" теперь задан как "public", но ранее он был определен как "private"
   (компиляция исходного файла "Laba1.cpp")
       C:\Users\User\Desktop\LabaYAIMP\Laba1\Hashy.h(37,9):
        см. объявление "HashTable::Token"
   
+  LexicalAnilizer.cpp
+C:\Users\User\Desktop\LabaYAIMP\Laba1\Hashy.h(43,9): warning C4240: нестандартное расширение: уровень доступа "HashTable::Token" теперь задан как "public", но ранее он был определен как "private"
+  (компиляция исходного файла "LexicalAnilizer.cpp")
+      C:\Users\User\Desktop\LabaYAIMP\Laba1\Hashy.h(37,9):
+       см. объявление "HashTable::Token"
+  
+  Parser.cpp
+C:\Users\User\Desktop\LabaYAIMP\Laba1\Hashy.h(43,9): warning C4240: нестандартное расширение: уровень доступа "HashTable::Token" теперь задан как "public", но ранее он был определен как "private"
+  (компиляция исходного файла "Parser.cpp")
+      C:\Users\User\Desktop\LabaYAIMP\Laba1\Hashy.h(37,9):
+       см. объявление "HashTable::Token"
+  
+  SematixAnilizer.cpp
+C:\Users\User\Desktop\LabaYAIMP\Laba1\Hashy.h(43,9): warning C4240: нестандартное расширение: уровень доступа "HashTable::Token" теперь задан как "public", но ранее он был определен как "private"
+  (компиляция исходного файла "SematixAnilizer.cpp")
+      C:\Users\User\Desktop\LabaYAIMP\Laba1\Hashy.h(37,9):
+       см. объявление "HashTable::Token"
+  
+  Создание кода...
   Laba1.vcxproj -> C:\Users\User\Desktop\LabaYAIMP\Laba1\x64\Debug\Laba1.exe

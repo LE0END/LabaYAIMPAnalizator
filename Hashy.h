@@ -37,7 +37,7 @@ private:
 	struct Token;
 	Wector<Wector<Token>> Table;
 	size_t factsz = 0;
-
+	bool empty = true;
 public:
 	
 	struct Token {
@@ -55,5 +55,6 @@ public:
 	void print(std::ostream& out);
 	void erase(const std::string& S);
 	void erase(std::pair<size_t, size_t> Pos);
+	bool Empty();
 };
 

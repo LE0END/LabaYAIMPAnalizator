@@ -25,6 +25,14 @@ Procedure
         Type
           INTEGER : integer
         SEMICOLON : ;
+      Descr
+        VarList
+          Id
+            ID : e
+        COLON : :
+        Type
+          INTEGER : integer
+        SEMICOLON : ;
     Operators
       Op
         Id

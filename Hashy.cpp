@@ -46,6 +46,7 @@ size_t HashTable::size() {
 }
 
 void HashTable::insert(const Token& tok) {
+	empty = false;
 	if (factsz >= Table.size()) {
 		Wector<Wector<Token>> Tmp(Table.size() * 1.4 + 5);
 		for (int i = 0; i < Table.size(); i++) {
@@ -71,10 +72,10 @@ std::pair<long long, long long> HashTable::find(const std::string& S) {
 	size_t h = hash(S, Table.size());
 	for (int i = 0; i < Table[h].size(); i++) {
 		if (Table[h][i].str == S) {
-			return std::pair<size_t, size_t>(h, i);
+			return std::pair<long long, long long>(h, i);
 		}
 	}
-	return std::pair<size_t, size_t>(-1, -1);
+	return std::pair<long long, long long>(-1, -1);
 }
 
 void HashTable::print(std::ostream& out) {
@@ -121,9 +122,25 @@ void HashTable::erase(const std::string& S) {
 	if (Tmp.first != -1 && Tmp.second != -1) {
 		erase(Tmp);
 	}
+	if (FullSize() == 0) {
+		empty = true;
+	}
+	else {
+		empty = false;
+	}
 }
 
 void HashTable::erase(std::pair<size_t, size_t> Pos) {
 	Table[Pos.first].erase(Pos.second);
+	if (FullSize() == 0) {
+		empty = true;
+	}
+	else {
+		empty = false;
+	}
+}
+
+bool HashTable::Empty() {
+	return empty;
 }
 

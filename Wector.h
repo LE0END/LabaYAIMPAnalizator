@@ -21,9 +21,6 @@ public:
 		std::fill(arr, arr + vsize, elem);
 	}
 	~Wector() {
-		/*for (int i = 0; i < vsize; i++) {
-			arr[i].~T();
-		}*/
 		delete[] arr;
 	}
 	Wector<T>& operator=(const Wector<T>& other) {
@@ -40,8 +37,6 @@ public:
 		vcapacity = std::max(newsz,vcapacity);
 		T* tmp = new T[vcapacity];
 		std::copy(arr, arr + vsize, tmp);
-		/*std::swap(tmp, arr);
-		delete[] tmp;*/
 		delete[] arr;
 		arr = tmp;         
 		vcapacity = newsz; 
@@ -51,9 +46,6 @@ public:
 		T* tmp = new T[vcapacity];
 		std::copy(arr, arr + vsize, tmp);
 		std::fill(tmp + vsize, tmp + newsz, T());
-		/*std::swap(tmp, arr);
-		vsize = newsz;
-		delete[] tmp;*/
 		delete[] arr;
 		arr = tmp;
 		vsize = newsz;
@@ -64,8 +56,6 @@ public:
 			vcapacity = vcapacity * 1.3 + 2;
 			T* tmp = new T[vcapacity];
 			std::copy(arr, arr + vsize - 1, tmp);
-			/*std::swap(tmp, arr);
-			delete[] tmp;*/
 			delete[] arr;
 			arr = tmp;
 		}
@@ -81,8 +71,6 @@ public:
 		if (pos == 0) {
 			tmp[0] = el;
 			std::copy(arr, arr + vsize - 1, tmp + 1);
-			/*std::swap(tmp, arr);
-			delete[] tmp;*/
 			delete[] arr;
 			arr = tmp;
 			return;
@@ -103,8 +91,6 @@ public:
 		T* tmp = new T[vcapacity];
 		std::copy(arr, arr + pos, tmp);
 		std::copy(arr + pos + 1, arr + vsize + 1, tmp + pos);
-		/*std::swap(arr, tmp);
-		delete[] tmp;*/
 		delete[] arr;
 		arr = tmp;
 

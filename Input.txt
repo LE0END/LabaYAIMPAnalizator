@@ -1,6 +1,7 @@
 procedure suslik ;
 begin
 var a,b,c,d : integer ;
+e : integer;
 a:=c+a+d+b+c;
 b:=12-(a+6);
 b:=12-a+6;

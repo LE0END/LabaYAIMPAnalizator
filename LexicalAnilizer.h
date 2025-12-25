@@ -12,7 +12,7 @@ private:
 public:
 	LexicalAnilizer();
 	void openInputFile(const std::string& InputFile);
-	void Analize(std::vector<HashTable::Token>& Tokens);
+	bool Analize(std::vector<HashTable::Token>& Tokens);
 	void PrintToFile(const std::string& Out);
 };
 
